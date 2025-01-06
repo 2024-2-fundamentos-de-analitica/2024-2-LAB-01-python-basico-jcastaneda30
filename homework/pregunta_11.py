@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+import csv
 
 def pregunta_11():
     """
@@ -16,3 +17,17 @@ def pregunta_11():
 
 
     """
+    diccionario = {}
+
+    with open("files/input/data.csv") as archivo:
+        lector = csv.reader(archivo, delimiter='\t')
+
+        for fila in lector:
+            number = int(fila[1])
+            letras = fila[3].split(",")
+            for letra in letras:
+                if letra not in diccionario:
+                    diccionario[letra] = 0
+                diccionario[letra] += number
+        
+    return diccionario
